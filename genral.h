@@ -76,6 +76,33 @@
 #define pn_vol_ok_sw_bit    PINB2
 
 
+#define port_forward_sw   	PORTB
+#define ddr_forward_sw    	DDRB
+#define pn_forward_sw     	PINB
+#define pn_forward_sw_bit 	PINB0
+
+
+#define port_backward_sw   	PORTB
+#define ddr_backward_sw    	DDRB
+#define pn_backward_sw     	PINB
+#define pn_backward_sw_bit 	PINB1
+
+#define port_step   		PORTC
+#define ddr_step    		DDRC
+#define pn_step     		PINC
+#define pn_step_bit 		PINC4
+
+#define port_dir  			PORTC
+#define ddr_dir    			DDRC
+#define pn_dir     			PINC
+#define pn_dir_bit 			PINC5
+
+
+
+
+
+
+
 void all_init(void);
 void port_init(void);
 void attr_init(void);

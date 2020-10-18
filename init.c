@@ -3,6 +3,7 @@
 
 void port_init(void)
 {
+	
     port_segment_a &= ~(1 << pin_segment_a_bit);
     ddr_segment_a |= (1 << pin_segment_a_bit);
 
@@ -36,7 +37,19 @@ void port_init(void)
     port_vol_ok_sw |= (1 << pn_vol_ok_sw_bit);
     ddr_vol_ok_sw &= ~(1 << pn_vol_ok_sw_bit);
 
- 
+
+    port_forward_sw |= (1 << pn_forward_sw_bit);
+    ddr_forward_sw &= ~(1 << pn_forward_sw_bit);
+	
+	  port_backward_sw |= (1 << pn_backward_sw_bit);
+    ddr_backward_sw &= ~(1 << pn_backward_sw_bit);
+		
+	port_step &= ~(1 << pn_step_bit);
+    ddr_step |= (1 << pn_step_bit);
+	
+	port_dir &= ~(1 << pn_dir_bit);
+    ddr_dir |= (1 << pn_dir_bit);
+	
 }
 
 void attr_init(void)
@@ -44,6 +57,9 @@ void attr_init(void)
 	
 TCCR1A=0x03;
 TCCR1B=0x19;
+OCR1A=1000;
+OCR1B=(OCR1A+1)/2;
+
 TIMSK=0x10;
 	
 	
