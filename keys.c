@@ -1,6 +1,6 @@
 #include "genral.h"
 
-void volume_reading(signed int *val)
+void volume_reading(signed long int *val)
 {
     static struct
     {
@@ -11,15 +11,15 @@ void volume_reading(signed int *val)
 
     } volume_pos;
 
-    if (((pn_speed_pos_sw & (1 << pn_speed_pos_sw_bit))) && (!(pn_speed_neg_sw & (1 << pn_speed_neg_sw_bit))))
+    if (((pn_speed_pos_sw & (1 << pn_speed_pos_sw_bit))) && ((pn_speed_neg_sw & (1 << pn_speed_neg_sw_bit))))
     {
         if (volume_pos.INC && volume_pos.two_seen1)
         {
-            *val += 1;
+            *val += 2;
         }
         if (volume_pos.DEC && volume_pos.two_seen1)
         {
-            *val -= 1;
+            *val -= 2;
         }
 
         volume_pos.two_seen0 = 1;
@@ -28,16 +28,16 @@ void volume_reading(signed int *val)
         volume_pos.DEC = 0;
     }
 
-    if (!((pn_speed_pos_sw & (1 << pn_speed_pos_sw_bit))) && ((pn_speed_neg_sw & (1 << pn_speed_neg_sw_bit))))
+    if (!((pn_speed_pos_sw & (1 << pn_speed_pos_sw_bit))) && !((pn_speed_neg_sw & (1 << pn_speed_neg_sw_bit))))
     {
         if (volume_pos.INC && volume_pos.two_seen0)
         {
-            *val += 1;
+            *val += 2;
         }
         if (volume_pos.DEC && volume_pos.two_seen0)
         {
 
-            *val -= 1;
+            *val -= 2;
         }
         volume_pos.two_seen0 = 0;
         volume_pos.two_seen1 = 1;
@@ -45,7 +45,7 @@ void volume_reading(signed int *val)
         volume_pos.DEC = 0;
     }
 
-    if (!((pn_speed_pos_sw & (1 << pn_speed_pos_sw_bit))) && (!(pn_speed_neg_sw & (1 << pn_speed_neg_sw_bit))))
+    if (((pn_speed_pos_sw & (1 << pn_speed_pos_sw_bit))) && (!(pn_speed_neg_sw & (1 << pn_speed_neg_sw_bit))))
     {
         if (volume_pos.two_seen0)
         {
@@ -57,7 +57,7 @@ void volume_reading(signed int *val)
         }
     }
 
-    if (((pn_speed_pos_sw & (1 << pn_speed_pos_sw_bit))) && ((pn_speed_neg_sw & (1 << pn_speed_neg_sw_bit))))
+    if (!((pn_speed_pos_sw & (1 << pn_speed_pos_sw_bit))) && ((pn_speed_neg_sw & (1 << pn_speed_neg_sw_bit))))
     {
         if (volume_pos.two_seen1)
         {

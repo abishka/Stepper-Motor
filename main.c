@@ -1,35 +1,31 @@
 #include "genral.h"
 
-
-signed int vool=3;
-extern unsigned char  characterArray[] ;
-
+extern unsigned char characterArray[];
+signed long int enc_movment =65000;
 
 int main(void)
 {
-all_init();
-	
+	all_init();
+
 	while (1)
 	{
-        //  volume_reading(&vool);
-  
-  
-  
-	//	   segment_a_to_g(characterArray[vool]);
-     
-	 
-	
-	 
-	 
-	/* 
-	 port_segment_en1 |= (1 << pin_segment_en1_bit);
-_delay_ms(2);
-	 port_segment_en1 &=~ (1 << pin_segment_en1_bit);
+		volume_reading(&enc_movment);
+		
 
-_delay_ms(5);
 
-*/
+		if (!(enc_movment % 3))
+		{
+			segment_a_to_g(a_seg);
+		}
+		else if (enc_movment % 3 == 1)
+		{
+			segment_a_to_g(g_seg);
+		}
+		else
+		{
+			segment_a_to_g(d_seg);
+		}
 	}
 
-return 0;
+	return 0;
 }
